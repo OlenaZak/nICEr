@@ -289,6 +289,38 @@ stun_getifaddrs(nr_local_addr addrs[], int maxaddrs, int *count)
             int e;
             int s = socket(AF_INET, SOCK_DGRAM, 0);
 
+            int buffer_size = 4194304;
+            socklen_t len = sizeof (buffer_size);
+            int ret = 0;
+            #ifdef SO_SNDBUF   
+              ret = setsockopt (s, SOL_SOCKET, SO_SNDBUF, (void *) &buffer_size, len);
+              if (ret != 0) {
+                printf("Could not create a buffer of requested %d bytes, %d: %s",
+                        buffer_size, ret, g_strerror (errno));              
+              }                  
+            #endif  
+            #ifdef SO_SNDBUFFORCE   
+              ret = setsockopt (s, SOL_SOCKET, SO_SNDBUFFORCE, (void *) &buffer_size, len);
+              if (ret != 0) {
+                printf("Could not create a buffer of requested %d bytes, %d: %s",
+                        buffer_size, ret, g_strerror (errno));              
+              }                  
+            #endif 
+            #ifdef SO_RCVBUF   
+              ret = setsockopt (s, SOL_SOCKET, SO_RCVBUF, (void *) &buffer_size, len);
+              if (ret != 0) {
+                printf("Could not create a buffer of requested %d bytes, %d: %s",
+                        buffer_size, ret, g_strerror (errno));              
+              }                  
+            #endif  
+            #ifdef SO_RCVBUFFORCE   
+              ret = setsockopt (s, SOL_SOCKET, SO_RCVBUFFORCE, (void *) &buffer_size, len);
+              if (ret != 0) {
+                printf("Could not create a buffer of requested %d bytes, %d: %s",
+                        buffer_size, ret, g_strerror (errno));              
+              }                  
+            #endif
+
             strncpy(ifr.ifr_name, if_addr->ifa_name, sizeof(ifr.ifr_name));
             /* TODO (Bug 896851): interface property for Android */
             /* Getting ethtool for ethernet information. */
