@@ -295,29 +295,25 @@ stun_getifaddrs(nr_local_addr addrs[], int maxaddrs, int *count)
             #ifdef SO_SNDBUF   
               ret = setsockopt (s, SOL_SOCKET, SO_SNDBUF, (void *) &buffer_size, len);
               if (ret != 0) {
-                printf("Could not create a buffer of requested %d bytes, %d: %s",
-                        buffer_size, ret, g_strerror (errno));              
+                printf("Could not create a buffer of requested %d bytes", buffer_size);             
               }                  
             #endif  
             #ifdef SO_SNDBUFFORCE   
               ret = setsockopt (s, SOL_SOCKET, SO_SNDBUFFORCE, (void *) &buffer_size, len);
               if (ret != 0) {
-                printf("Could not create a buffer of requested %d bytes, %d: %s",
-                        buffer_size, ret, g_strerror (errno));              
+                printf("Could not create a buffer of requested %d bytes", buffer_size);      
               }                  
             #endif 
             #ifdef SO_RCVBUF   
               ret = setsockopt (s, SOL_SOCKET, SO_RCVBUF, (void *) &buffer_size, len);
               if (ret != 0) {
-                printf("Could not create a buffer of requested %d bytes, %d: %s",
-                        buffer_size, ret, g_strerror (errno));              
+                printf("Could not create a buffer of requested %d bytes", buffer_size);               
               }                  
             #endif  
             #ifdef SO_RCVBUFFORCE   
               ret = setsockopt (s, SOL_SOCKET, SO_RCVBUFFORCE, (void *) &buffer_size, len);
               if (ret != 0) {
-                printf("Could not create a buffer of requested %d bytes, %d: %s",
-                        buffer_size, ret, g_strerror (errno));              
+                printf("Could not create a buffer of requested %d bytes", buffer_size);               
               }                  
             #endif
 
